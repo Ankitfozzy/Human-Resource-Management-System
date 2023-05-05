@@ -1,6 +1,8 @@
 package com.masai.ui;
 
 import java.util.Scanner;
+import com.masai.services.DepartmentService;
+import com.masai.services.DepartmentServiceImpl;
 
 public class Admin 
 {
@@ -21,7 +23,29 @@ public class Admin
 			displayAdminMenu();
 			System.out.print("Enter selection ");
 			choice = sc.nextInt();
+			DepartmentService departmentService = new DepartmentServiceImpl();
     		switch(choice) {
+    			case 1:
+    				departmentService.addDepartment();
+    				break;
+    			case 2:
+    				departmentService.viewDepartment();
+    				break;
+    			case 3:
+    				departmentService.updateDepartmentName();
+    				break;
+    			case 4:
+    				departmentService.registerEmployee();
+    				break;
+    			case 5:
+    				departmentService.changeDepartment();
+    				break;
+    			case 6:
+    				departmentService.approveLeaveRequest();
+    				break;
+    			case 7:
+    				departmentService.fireEmployee();
+    				break;
     			case 0:
     				System.out.println("Bye Bye Admin");
     				return;
@@ -51,7 +75,6 @@ public class Admin
     		System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
     		System.out.println("1. Admin Login");
     		System.out.println("2. Employee Login");
-    		System.out.println("3. Employee Registration");
     		System.out.println("0. Exit");
     		System.out.print("Enter Selection ");
     		choice = sc.nextInt();
