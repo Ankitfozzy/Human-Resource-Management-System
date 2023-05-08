@@ -11,4 +11,5 @@ public interface DepartmentDAO {
 	void addDepartment(Department department) throws SomeThingWentWrongException;
 	List<Department> getAllDepartments() throws DepartmentNotFound, SomeThingWentWrongException;
 	void updateDepartment(Department department) throws DepartmentNotFound, SomeThingWentWrongException;
+	
 }

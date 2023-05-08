@@ -15,7 +15,12 @@ public class EmployeeUI {
 		String username = sc.next();
 		System.out.print("Enter password ");
 		String password = sc.next();
-		employeeService.employeeLogin(username, password);
+		if(employeeService.employeeLogin(username, password)) {
+			userMenu(sc);
+		}
+		else {
+			System.out.println("Invalid Creditials");
+		}
 	}
 	
 	static void displayEmployeeMenu() {
@@ -32,39 +37,44 @@ public class EmployeeUI {
 	
 	static void userMenu(Scanner sc) {
 		int choice = 0;
-		do {
-			displayEmployeeMenu();
-			System.out.print("Enter selection ");
-			choice = sc.nextInt();
-    		switch(choice) {
-    			case 1:
-    				employeeService.updateAccountDetails();
-    				break;
-    			case 2:
-    				employeeService.applyLeave();
-    				break;
-    			case 3:
-    				employeeService.statusOfLeave();
-    				break;
-    			case 4:
-    				employeeService.historyOfLeave();
-    				break;
-    			case 5:
-    				employeeService.viewMonthSalary();
-    				break;
-    			case 6:
-    				employeeService.viewAnnualSalary();
-    				break;
-    			case 7:
-    				employeeService.deleteAccount();
-    				break;
-    			case 0:
-    				System.out.println("Bye Bye Employee");
-    				return;
-    			default:
-    				System.out.println("Invalid Selection, try again");
-    		}
-    	}while(choice != 0);
+		try {
+			do {
+				displayEmployeeMenu();
+				System.out.print("Enter selection ");
+				choice = sc.nextInt();
+	    		switch(choice) {
+	    			case 1:
+	    				employeeService.updateAccountDetails();
+	    				break;
+	    			case 2:
+	    				employeeService.applyLeave();
+	    				break;
+	    			case 3:
+	    				employeeService.statusOfLeave();
+	    				break;
+	    			case 4:
+	    				employeeService.historyOfLeave();
+	    				break;
+	    			case 5:
+	    				double salary = employeeService.viewMonthSalary();
+	    				System.out.println(salary);
+	    				break;
+	    			case 6:
+	    				employeeService.viewAnnualSalary();
+	    				break;
+	    			case 7:
+	    				employeeService.deleteAccount();
+	    				break;
+	    			case 0:
+	    				System.out.println("Bye Bye Employee");
+	    				return;
+	    			default:
+	    				System.out.println("Invalid Selection, try again");
+	    		}
+	    	}while(choice != 0);
+		} catch (Exception e) {
+			e.getMessage();
+		}
 	}
 	
 }

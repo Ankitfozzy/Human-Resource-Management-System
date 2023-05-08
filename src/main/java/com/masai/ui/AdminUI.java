@@ -1,17 +1,25 @@
 package com.masai.ui;
 
+import java.util.List;
 import java.util.Scanner;
 
+import com.masai.entities.Department;
+import com.masai.exceptions.DepartmentNotFound;
+import com.masai.exceptions.EmployeeNotFound;
+import com.masai.exceptions.SomeThingWentWrongException;
 import com.masai.services.DepartmentService;
 import com.masai.services.DepartmentServiceImpl;
+import com.masai.services.EmployeeService;
+import com.masai.services.EmployeeServiceImpl;
 
 public class AdminUI {
 	
 	static DepartmentService departmentService = new DepartmentServiceImpl();
+	static EmployeeService employeeService = new EmployeeServiceImpl();
 	
 	
 	
-	static void adminLogin(Scanner sc) {
+	static void adminLogin(Scanner sc) throws SomeThingWentWrongException, DepartmentNotFound, EmployeeNotFound {
 		System.out.print("Enter username ");
 		String username = sc.next();
 		System.out.print("Enter password ");
@@ -34,66 +42,75 @@ public class AdminUI {
 		System.out.println("0. Logout");
 	}
 	
-	static void adminMenu(Scanner sc) {
-		int choice = 0;
-		do {
-			displayAdminMenu();
-			System.out.print("Enter selection ");
-			choice = sc.nextInt();
-    		switch(choice) {
-    			case 1:
-    				addDepartment();
-    				break;
-    			case 2:
-    				viewDepartment();
-    				break;
-    			case 3:
-    				updateDepartmentName();
-    				break;
-    			case 4:
-    				registerEmployee();
-    				break;
-    			case 5:
-    				changeDepartment();
-    				break;
-    			case 6:
-    				approveLeaveRequest();
-    				break;
-    			case 7:
-    				fireEmployee();
-    				break;
-    			case 0:
-    				System.out.println("Bye Bye Admin");
-    				return;
-    			default:
-    				System.out.println("Invalid Selection, try again");
-    		}
-    	}while(choice != 0);	
+	static void adminMenu(Scanner sc) throws SomeThingWentWrongException, DepartmentNotFound, EmployeeNotFound {
+	    int choice = 0;
+
+	    try {
+			
+	    	do {
+		        displayAdminMenu();
+		        System.out.print("Enter selection: ");
+		        choice = sc.nextInt();
+		        
+		        switch (choice) {
+		            case 1:
+		                addDepartment();
+		                break;
+		            case 2:
+		                viewDepartment();
+		                break;
+		            case 3:
+		                updateDepartmentName();
+		                break;
+		            case 4:
+		                registerEmployee();
+		                break;
+		            case 5:
+		                changeDepartment();
+		                break;
+		            case 6:
+		                approveLeaveRequest();
+		                break;
+		            case 7:
+		                fireEmployee();
+		                break;
+		            case 0:
+		                System.out.println("Bye Bye, Admin!");
+		                break;
+		            default:
+		                System.out.println("Invalid selection. Please try again.");
+		        }
+		    } while (choice != 0);
+		} catch (Exception e) {
+			e.getMessage();
+		}
 	}
 	
 
 	
-	static void addDepartment() {
+	static void addDepartment() throws SomeThingWentWrongException {
 		//DepartmentService departmentService = new DepartmentServiceImpl();
 		departmentService.addDepartment();
+		System.out.println("Department Added");
 	}
 	
-	static void viewDepartment() {
+	static void viewDepartment() throws DepartmentNotFound, SomeThingWentWrongException {
 		//DepartmentService departmentService = new DepartmentServiceImpl();
-		departmentService.viewDepartment();
+		List<Department> departmentList = departmentService.viewDepartment();
+		System.out.println(departmentList.toString());
 	}
 	
-	static void updateDepartmentName() {
+	static void updateDepartmentName() throws DepartmentNotFound, SomeThingWentWrongException {
 		//DepartmentService departmentService = new DepartmentServiceImpl();
 		departmentService.updateDepartmentName();
 	}
 
-	static void registerEmployee() {
+	static void registerEmployee() throws DepartmentNotFound, SomeThingWentWrongException, EmployeeNotFound {
 		//DepartmentService departmentService = new DepartmentServiceImpl();
-		departmentService.registerEmployee();
+		employeeService.registerEmployee();
 	}
 
-	static void changeDepartment() {
+	static void changeDepartment() throws DepartmentNotFound, SomeThingWentWrongException, EmployeeNotFound {
 		//DepartmentService departmentService = new DepartmentServiceImpl();
 		departmentService.changeDepartment();
 	}
@@ -101,11 +118,11 @@ public class AdminUI {
 	
 	static void approveLeaveRequest() {
 		//DepartmentService departmentService = new DepartmentServiceImpl();
-		departmentService.approveLeaveRequest();
+		employeeService.approveLeaveRequest();
 	}
 
 	static void fireEmployee(){
 		//DepartmentService departmentService = new DepartmentServiceImpl();
-		departmentService.fireEmployee();
+		employeeService.fireEmployee();
 	}
 }

@@ -2,6 +2,7 @@ package com.masai.entities;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,17 +19,16 @@ import jakarta.persistence.OneToMany;
 	    @Column(name = "name")
 	    private String name;
 
-	    @OneToMany(mappedBy = "department")
+	    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
 	    private List<Employee> employees;
 
 		public Department() {
 			super();
 		}
 
-		public Department(String name, List<Employee> employees) {
+		public Department(String name) {
 			super();
 			this.name = name;
-			this.employees = employees;
 		}
 
 		public Long getId() {
@@ -57,7 +57,7 @@ import jakarta.persistence.OneToMany;
 
 		@Override
 		public String toString() {
-			return "Department [id=" + id + ", name=" + name + ", employees=" + employees + "]";
+			return "Department [id=" + id + ", name=" + name+"]";
 		}
 	    
 	}

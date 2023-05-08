@@ -14,21 +14,18 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "first_name", nullable = false)
-    private String firstName;
-
-    @Column(name = "last_name", nullable = false)
-    private String lastName;
-    
-    @Column(name = "salary", nullable = false)
-    private double salary;
-    
-    @Column(name = "total_leaves", nullable = false)
-    private int totalLeaves;
     
     @Column(name = "email", unique = true, nullable = false)
     private String email;
+    
+    @Column(name = "password")
+    private String password;
+    
+	@Column(name = "salary", nullable = false)
+    private double salary;
+    
+    @Column(name = "total_leaves")
+    private int totalLeaves;
     
     @Column(name = "is_deleted", nullable = false, columnDefinition = "boolean default false")
     private boolean isDeleted;
@@ -41,14 +38,22 @@ public class Employee {
 	public Employee() {
 		super();
 	}
+	
+	
+	public Employee(String email, String password, double salary, Department department, int totalLeaves) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.salary = salary;
+		this.department = department;
+		this.totalLeaves = totalLeaves;
+	}
 
 	
 
-	public Employee(String firstName, String lastName, double salary, String email, boolean isDeleted,
+	public Employee(double salary, String email, boolean isDeleted,
 			Department department, int totalLeaves) {
 		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
 		this.salary = salary;
 		this.totalLeaves = totalLeaves;
 		this.email = email;
@@ -66,30 +71,6 @@ public class Employee {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-
-
-	public String getLastName() {
-		return lastName;
-	}
-
-
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
 	}
 
 
@@ -153,12 +134,22 @@ public class Employee {
 	}
 
 
+	
+	
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", salary=" + salary
-				+ ", totalLeaves=" + totalLeaves + ", email=" + email + ", isDeleted=" + isDeleted + ", department="
-				+ department + "]";
+		return "Employee [id=" + id + ", email=" + email + ", password=" + password + ", salary=" + salary
+				+ ", totalLeaves=" + totalLeaves + ", isDeleted=" + isDeleted + ", department=" + department + "]";
 	}
 
 
