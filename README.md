@@ -57,6 +57,45 @@ Employees table: employee_id (primary key, auto_increment), username (email), pa
 Leave table: leave_id (primary key, auto_increment), employee_id (foreign key), start_date, end_date, status, remarks, is_deleted
 Please refer to the ER-Diagram for the complete structure and relationships of the database.
 
+             +-------------------+
+             |   Departments    |
+             +-------------------+
+             | department_id    |
+             | department_name  |
+             | is_deleted       |
+             +-------------------+
+                    |     ^
+                    |     |
+                    |     |
+              1     |     |    N
+             +------+-+---+------+
+             |  Employees        |
+             +-------------------+
+             | employee_id       |
+             | username (email)  |
+             | password          |
+             | department_id (FK)|
+             | salary            |
+             | date_of_joining   |
+             | is_deleted        |
+             +-------------------+
+                    |     |
+                    |     |
+                    |     |
+              N     |     |    1
+             +------+-+---+------+
+             |   Leave            |
+             +-------------------+
+             | leave_id           |
+             | employee_id (FK)   |
+             | start_date         |
+             | end_date           |
+             | status             |
+             | remarks            |
+             | is_deleted         |
+             +-------------------+
+
+
 <h2>Usage</h2>
 
 Access the application through a web browser or localhost.
