@@ -46,6 +46,13 @@ Delete account
 
 Logout
 
+<h3>Tech Stack</h3>
+Java
+MySQL
+Hibernate
+JPA
+JDBC
+
 <h2>Database</h2>
 
 The application uses a relational database to store employee and department data. The following fields are included:
